@@ -1,0 +1,457 @@
+openapi: 3.0.1
+
+info:
+  title: Drones Administration API
+  description: Register fleet of drones, load drones with medications
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: drones-administration@musalasoft.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+
+servers:
+  - url: https://{hostName}/api/v1
+    description: Remote Host
+    variables:
+      hostName:
+        default: remoteHost.com
+  - url: http://{hostName}:{port}/api/v1
+    description: Internal Host
+    variables:
+      hostName:
+        enum:
+          - localhost
+        default: localhost
+      port:
+        default: "8080"
+
+
+tags:
+  - name: Medication
+    description: Medication API Endpoints
+  - name: Drone
+    description: Drone API Endpoints
+
+paths:
+  /medication:
+    post:
+      tags:
+        - Medication
+      summary: Add New Medication
+      description: Add New Medication
+      operationId: addMedication
+      requestBody:
+        description: Medication Request Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicationModel'
+        required: true
+      responses:
+        200:
+          description: Success Addition Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicationModel'
+        400:
+          description: Bad Medication Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /medication/{medicationCode}:
+    get:
+      tags:
+        - Medication
+      summary: Get Medication By Code
+      description: Get Existing Medication Data By Medication Code
+      operationId: getMedicationByCode
+      parameters:
+        - name: medicationCode
+          description: Medication Code
+          in: path
+          required: true
+          example: "ABC_123"
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicationModel'
+        404:
+          description: Medication Does Not Exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        400:
+          description: Bad Update Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    put:
+      tags:
+        - Medication
+      summary: Update Medication
+      description: Update Existing Medication Data
+      operationId: updateMedication
+      parameters:
+        - name: medicationCode
+          description: Medication Code
+          in: path
+          required: true
+          example: "ABC_123"
+          schema:
+            type: string
+      requestBody:
+        description: Update Medication Request Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicationModel'
+        required: true
+      responses:
+        200:
+          description: Success Update Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicationModel'
+        404:
+          description: Medication Does Not Exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        400:
+          description: Bad Update Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      tags:
+        - Medication
+      summary: Delete Medication By Code
+      description: Delete Existing Medication By Medication Code
+      operationId: deleteMedicationByCode
+      parameters:
+        - name: medicationCode
+          description: Medication Code
+          in: path
+          required: true
+          example: "ABC_123"
+          schema:
+            type: string
+      responses:
+        204:
+          description: No Content Success Response
+        404:
+          description: Medication Does Not Exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        400:
+          description: Bad Update Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /drone:
+    post:
+      tags:
+        - Drone
+      summary: Register Drone
+      description: Register New Drone
+      operationId: registerDrone
+      requestBody:
+        description: Drone Registeration Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DroneModel'
+        required: true
+      responses:
+        200:
+          description: Success Registration Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DroneModel'
+        400:
+          description: Bad Registration Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /drone/{droneSerialNumber}:
+    get:
+      tags:
+        - Drone
+      summary: Get Drone By Serial Number
+      description: Get Registered Drone Data By Serial Number
+      operationId: getDroneBySerialNumber
+      parameters:
+        - name: droneSerialNumber
+          description: Drone Serial Number
+          in: path
+          required: true
+          example: "ABC123"
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DroneModel'
+        404:
+          description: Drone Does Not Exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        400:
+          description: Bad Update Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    put:
+      tags:
+        - Drone
+      summary: Update Registered Drone
+      description: Update Registered Drone Data
+      operationId: updateRegisteredDrone
+      parameters:
+        - name: droneSerialNumber
+          description: Drone Serial Number
+          in: path
+          required: true
+          example: "ABC123"
+          schema:
+            type: string
+      requestBody:
+        description: Update Registered Drone Request Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DroneModel'
+        required: true
+      responses:
+        200:
+          description: Success Update Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DroneModel'
+        404:
+          description: Drone Does Not Exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        400:
+          description: Bad Update Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      tags:
+        - Drone
+      summary: Delete Drone By Serial Number
+      description: Delete Registered Drone By Serial Number
+      operationId: deleteDroneBySerialNumber
+      parameters:
+        - name: droneSerialNumber
+          description: Drone Serial Number
+          in: path
+          required: true
+          example: "ABC123"
+          schema:
+            type: string
+      responses:
+        204:
+          description: No Content Success Response
+        404:
+          description: Drone Does Not Exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        400:
+          description: Bad Update Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /drone/{droneSerialNumber}/load:
+    post:
+      tags:
+        - Drone
+      summary: Load Drone With Medications
+      description: Load Drone By Drone Serial Number With Medications By Medication Codes
+      operationId: loadDroneWithMedications
+      parameters:
+        - name: droneSerialNumber
+          description: Drone Serial Number
+          in: path
+          required: true
+          example: "ABC123"
+          schema:
+            type: string
+      requestBody:
+        description: Medication Codes List Request Body
+        content:
+          application/json:
+            schema:
+              type: array
+              example: [ "ABC_123","XYZ_123" ]
+              items:
+                type: string
+        required: true
+      responses:
+        200:
+          description: Success Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DroneModel'
+        404:
+          description: Drone Does Not Exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        400:
+          description: Bad Update Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /drone/availableForLoad:
+    get:
+      tags:
+        - Drone
+      summary: Get Drones Available For Load
+      description: Get Drones Available To Be Loaded With New Medications
+      operationId: getDronesAvailableForLoading
+      parameters:
+        - name: pageNumber
+          in: query
+          example: 3
+          required: true
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          example: 10
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DronePage'
+        400:
+          description: Bad Update Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+
+components:
+  schemas:
+    MedicationModel:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "ABC_123"
+        name:
+          type: string
+          example: "Medicine-123_1mg"
+        weightInGram:
+          type: integer
+          example: 10
+        imageUrl:
+          type: string
+          example: "https://imageurl.com"
+    DronePage:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          example: 1
+        pageSize:
+          type: integer
+          example: 10
+        totalElements:
+          type: integer
+          example: 100
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/DroneModel'
+    DroneModel:
+      type: object
+      properties:
+        serialNumber:
+          type: string
+          maxLength: 100
+          example: "ABCD12345"
+        loadWeightLimitInGram:
+          type: integer
+          example: 300
+        batteryCapacityInPercentage:
+          type: integer
+          example: 100
+        model:
+          example: HEAVY_WEIGHT
+          type: string
+          enum:
+            - LIGHT_WEIGHT
+            - MIDDLE_WEIGHT
+            - CRUISE_WEIGHT
+            - HEAVY_WEIGHT
+        state:
+          example: DELIVERED
+          type: string
+          enum:
+            - IDLE
+            - LOADING
+            - LOADED
+            - DELIVERING
+            - DELIVERED
+            - RETURNING
+        MedicationModelList:
+          type: array
+          items:
+            $ref: '#/components/schemas/MedicationModel'
+    Problem:
+      properties:
+        httpStatusCode:
+          type: integer
+          example: 400
+        httpStatusMessage:
+          type: string
+          example: BAD REQUEST
+        detailedErrorReason:
+          type: string
+          example: Invalid Request Data
+

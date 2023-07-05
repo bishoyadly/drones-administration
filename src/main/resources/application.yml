@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/drones-administration-db}
+    username: ${DB_USER_NAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: false
+
+  liquibase:
+    enabled: true
+    change-log: db/changelog/schema.xml
+
+
+dronesSchedulerName: ${DRONES_SCHEDULER_NAME:drones-scheduler-task}
+dronesSchedulerPoolSize: ${DRONES_SCHEDULER_POOL_SIZE:10}
+droneSchedulerTaskDelayInMS: ${DRONES_SCHEDULER_TASK_DELAY_IN_MS:30000}
+
+springdoc:
+  swagger-ui:
+    path: /
+    url: /drones-administration.yaml
+
+
+
+logging:
+  level:
+    root: info
