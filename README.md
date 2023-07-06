@@ -1,7 +1,5 @@
 # Drones Administration Service
 
----
-
 Service was deployed on Render
 https://drones-administration-service.onrender.com/
 
@@ -17,20 +15,17 @@ https://drones-administration-service.onrender.com/
   </picture>
 </a>
 
----
 
 ## Table of Contents
 
----
 - [About](#About)
-- [Service Architecture](#Service Architecture)
-- [Technologies Used](#Technologies Used)
-- [Build And Run Instructions](#Build And Run Instructions)
+- [Service Architecture](#service-architecture)
+- [Technologies Used](#technologies-used)
+- [Build And Run Instructions](#build-and-run-instructions)
 
 
 ## About
 
----
 Drones Administration service allows:
 - Registering a drone
 - Loading a drone with medication items
@@ -39,7 +34,6 @@ Drones Administration service allows:
 
 ## Service Architecture
 
----
 The service architecture was built following [Robert C. Martin's Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 The clean architecture compiles many code designs and principles, like SOLID, stable abstractions, and others. But, the core idea is to divide the system into levels based on the business value. Hence, the highest level has business rules, with each lower one getting closer to the I/O devices.
@@ -59,7 +53,6 @@ The architecture produce systems that are:
 
 ## Technologies Used
 
----
 - Java
 - Maven
 - Spring Boot, Spring MVC, Spring Data JPA
@@ -71,7 +64,6 @@ The architecture produce systems that are:
 
 ## Build And Run Instructions
 
----
 **Install Required Tools:**
 
 1. Install Java OpenJDK 11 using [Software Development Kit Manager](https://sdkman.io/) or from preferred source
