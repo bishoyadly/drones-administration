@@ -47,7 +47,7 @@ The architecture produce systems that are:
 
 <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">
   <picture>
-    <img src="https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg" height="500" width="700" alt="Spring"/>
+    <img src="screenshots/CleanArchitecture.jpg" height="500" width="700" alt="Spring"/>
   </picture>
 </a>
 
