@@ -1,5 +1,7 @@
 # Drones Administration Service
 
+[Practical Task GitLab Repository](https://oauth:glpat-2r4Q5zpjfpstAZCfPrFy@gitlab.com/musala_soft/DEV_DRONES-034a7f37-af29-9591-126f-a7a402526b71.git)
+
 Service was deployed on Render
 https://drones-administration-service.onrender.com/
 
